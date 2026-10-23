@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeadFlow | Mini CRM</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ADMIN LOGIN SCREEN -->
+  <div id="loginScreen" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0d1b35;font-family:Arial,sans-serif;padding:20px;box-sizing:border-box;">
+    <form id="loginForm" style="background:white;padding:32px;border-radius:16px;width:100%;max-width:380px;box-sizing:border-box;box-shadow:0 10px 35px #0004;">
+      <h1 style="color:#163768;margin-top:0;">LeadFlow</h1>
+      <p style="color:#64748b;">Admin Login</p>
+
+      <label for="loginUsername">Username</label>
+      <input id="loginUsername" type="text" required
+        autocomplete="username"
+        placeholder="Enter username"
+        style="width:100%;padding:12px;margin:8px 0 18px;box-sizing:border-box;border:1px solid #cbd5e1;border-radius:7px;">
+
+      <label for="loginPassword">Password</label>
+      <input id="loginPassword" type="password" required
+        autocomplete="current-password"
+        placeholder="Enter password"
+        style="width:100%;padding:12px;margin:8px 0 12px;box-sizing:border-box;border:1px solid #cbd5e1;border-radius:7px;">
+
+      <p id="loginError" role="alert" style="color:#b91c1c;"></p>
+
+      <button type="submit"
+        style="width:100%;padding:13px;background:#2878d0;color:white;border:0;border-radius:8px;cursor:pointer;font-weight:bold;">
+        Log In
+      </button>
+    </form>
+  </div>
+
+  <!-- MAIN CRM DASHBOARD -->
+  <div class="app" style="display:none;">
+    <aside class="sidebar">
+      <h2 class="logo">Lead<span>Flow</span></h2>
+      <p class="side-label">WORKSPACE</p>
+
+      <a class="nav active" href="#dashboard">▦ Dashboard</a>
+      <a class="nav" href="#leads">♙ All Leads</a>
+
+      <button id="logoutBtn" class="nav" type="button">↪ Logout</button>
+
+      <div class="sidebar-bottom">
+        <div class="avatar">A</div>
+        <div>
+          <strong>Admin</strong>
+          <small>CRM Manager</small>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">WORKSPACE / OVERVIEW</p>
+          <h1>Lead Management</h1>
+          <p class="subtitle">Manage your prospects and grow your business.</p>
+        </div>
+        <button class="primary-btn" id="addLeadBtn">+ Add New Lead</button>
+      </header>
+
+      <section class="stats">
+        <article class="stat-card">
+          <p>Total Leads</p>
+          <h2 id="totalLeads">0</h2>
+          <span>All prospects in your workspace</span>
+        </article>
+
+        <article class="stat-card">
+          <p>New Leads</p>
+          <h2 id="newLeads">0</h2>
+          <span>Awaiting first contact</span>
+        </article>
+
+        <article class="stat-card">
+          <p>Contacted</p>
+          <h2 id="contactedLeads">0</h2>
+          <span>Conversations started</span>
+        </article>
+
+        <article class="stat-card">
+          <p>Converted</p>
+          <h2 id="convertedLeads">0</h2>
+          <span>Successful conversions</span>
+        </article>
+      </section>
+
+      <section class="leads-section" id="leads">
+        <div class="section-heading">
+          <div>
+            <h2>Client Leads</h2>
+            <p>View and manage your potential customers.</p>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <input id="searchInput" type="search"
+            placeholder="Search by name or email...">
+
+          <select id="filterStatus">
+            <option value="All">All statuses</option>
+            <option value="New">New</option>
+            <option value="Contacted">Contacted</option>
+            <option value="Converted">Converted</option>
+          </select>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>CLIENT</th>
+                <th>SOURCE</th>
+                <th>STATUS</th>
+                <th>FOLLOW-UP NOTES</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody id="leadsTable">
+              <tr>
+                <td colspan="5" class="empty">Loading leads...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="footnote">LeadFlow CRM · Your client information at a glance</p>
+      </section>
+    </main>
+  </div>
+
+  <!-- ADD LEAD FORM -->
+  <dialog id="leadDialog">
+    <form id="leadForm">
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">CLIENT DETAILS</p>
+          <h2>Add New Lead</h2>
+        </div>
+        <button type="button" class="close-btn" id="closeDialog">×</button>
+      </div>
+
+      <label for="leadName">Full Name</label>
+      <input id="leadName" name="name" required maxlength="100"
+        placeholder="e.g. Ananya Rao">
+
+      <label for="leadEmail">Email Address</label>
+      <input id="leadEmail" name="email" type="email" required maxlength="254"
+        placeholder="ananya@example.com">
+
+      <label for="leadSource">Lead Source</label>
+      <select id="leadSource" name="source" required>
+        <option value="">Select source</option>
+        <option>Website</option>
+        <option>LinkedIn</option>
+        <option>Referral</option>
+        <option>Social Media</option>
+        <option>Other</option>
+      </select>
+
+      <p id="formError" class="form-error"></p>
+      <button class="primary-btn submit-btn" type="submit">Save Lead</button>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
